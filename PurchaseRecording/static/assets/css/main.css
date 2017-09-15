@@ -1,0 +1,37 @@
+body{
+	background-color: #CCCCCC;  /*设置背景色为淡灰色*/
+	max-width:1000px;           /*设置网页最大宽度，方便下面布局*/
+	margin:20px auto;           /*设置网页顶部离浏览器边缘的距离，其他方向为auto*/
+	/*border:3px solid white;     !*设置网页的边框为3px厚的实心白色线*!*/
+}
+
+header{
+	background:white;
+	margin:20px;
+	/*height:200px;*/
+}
+
+article{
+	background:white;
+	margin:0px 20px 20px 20px; /*上 右 下 左的外边距分别为0px 50px 50px 50px*/
+	height:750px;
+	width:740px ;
+	float:left;                /*设置article盒子向左浮动（关于float属性的详解在下面，需要好好理解）*/
+}
+
+aside{
+	background:white;
+	height:750px;
+	margin:0px 20px 20px 0px;
+	width:200px;
+	float:right;              /*设置aside盒子向右浮动*/
+}
+
+footer{
+	background:white;
+	margin:50px;
+	height:150px;
+	width:900px;
+	clear:both;              /*clear是用来抵抗float属性的，由于上面的两个盒子带有float属性，所以这里需要应用clear属性，否则会发生重叠，可以试着注释本条属性看看*/
+}
+

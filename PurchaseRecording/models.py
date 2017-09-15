@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 from datetime import datetime, timedelta
+from django.utils import timezone
 
 from django.db import models
 
@@ -24,7 +25,7 @@ class CreditCard(models.Model):
     card_num = models.CharField(unique=True, primary_key=True, max_length=16)
     sec_code = models.CharField(max_length=4, default="0000")
     card_name = models.CharField(unique=True, max_length=10)
-    card_exp_date = models.DateField(datetime.now().date() + timedelta(days=365 * 5))
+    card_exp_date = models.DateField(timezone.now().date() + timedelta(days=365 * 5))
 
     def __unicode__(self):
         return self.card_name
@@ -81,10 +82,10 @@ class Address(models.Model):
 
 
 class OrderDetail(models.Model):
-    order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
     order_name = models.CharField(max_length=20)
     item_price = models.FloatField(default=0.0)
-    item_num = models.IntegerField(default=1)
+    item_num = models.IntegerField(default=1, null=True, blank=True)
     carrier = models.IntegerField(choices=carrier_type, default=9)
     tracking_num = models.CharField(max_length=20, default="undefined")
     deliver_address = models.ForeignKey(Address)
@@ -96,8 +97,8 @@ class OrderDetail(models.Model):
 
 
 class PaymentInfo(models.Model):
-    payment_id = models.CharField(max_length=20)
-    payment_date = models.DateField()
+    payment_date = models.DateField(default=timezone.now().date())
+    paid_to = models.ForeignKey(CreditCard, null=True, blank=True)
     amount = models.FloatField()
 
 
@@ -109,4 +110,4 @@ class GiftCard(models.Model):
     pin_num = models.CharField(max_length=10)
     is_used = models.BooleanField()
     remain_value = models.FloatField(default=value)
-    expire_date = models.DateField(default=datetime.now().date() + timedelta(days=365))
+    expire_date = models.DateField(default=timezone.now().date() + timedelta(days=365))

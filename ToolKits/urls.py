@@ -17,6 +17,6 @@ from django.conf.urls import url,include
 from django.contrib import admin
 
 urlpatterns = [
-    url(r'^PurchaseRecord/', include('PurchaseRecoding.urls')),
+    url(r'^PurchaseRecord/', include('PurchaseRecording.urls')),
     url(r'^admin/', admin.site.urls),
 ]

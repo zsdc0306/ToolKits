@@ -1,8 +1,9 @@
 body{
-	background-color: #CCCCCC;  /*设置背景色为淡灰色*/
+    background: url("/static/assets/media/vintage-concrete.png");
+	/*background-color: #CCCCCC;  !*设置背景色为淡灰色*!*/
 	max-width:1000px;           /*设置网页最大宽度，方便下面布局*/
 	margin:20px auto;           /*设置网页顶部离浏览器边缘的距离，其他方向为auto*/
-	/*border:3px solid white;     !*设置网页的边框为3px厚的实心白色线*!*/
+	/*border:3px solid white;   wormz.png  !*设置网页的边框为3px厚的实心白色线*!*/
 }
 
 header{

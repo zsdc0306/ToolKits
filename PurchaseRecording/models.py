@@ -34,18 +34,20 @@ class CreditCard(models.Model):
 class CashBackSite(models.Model):
     site_url = models.CharField(unique=True, max_length=20, error_messages={'unique': "site already existed"})
     site_name = models.CharField(unique=True, primary_key=True, max_length=10)
+    balance = models.FloatField(default=0.0)
 
 
 class Merchandiser(models.Model):
     name = models.CharField(primary_key=True, max_length=10)
     url = models.CharField(max_length=20)
+    reward = models.FloatField(default=0.0)
 
     def __unicode__(self):
         return self.name
 
 
 class Order(models.Model):
-    order_inner_id = models.AutoField(primary_key=True, max_length=20)
+    order_id = models.AutoField(primary_key=True, max_length=20)
     order_name = models.CharField(max_length=20)
     merchandiser = models.ForeignKey(Merchandiser)
     order_date = models.DateField()
@@ -57,15 +59,16 @@ class Order(models.Model):
 
 
 class EarningDetail(models.Model):
-    order_id = models.ForeignKey(Order, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
     cashback_site_cashback = models.FloatField(default=0.0)
+    cashback = models.ForeignKey(CashBackSite, null=True, blank=True)
     credit_card_cashback = models.FloatField(default=0.0)
     other_cashback = models.FloatField(default=0.0)
     note = models.CharField(blank=True, max_length=200)
     earing_num = models.FloatField(default=0)
 
     def __unicode__(self):
-        return self.order_id.order_name
+        return self.order.order_name
 
 
 class Address(models.Model):
@@ -97,7 +100,7 @@ class OrderDetail(models.Model):
 
 
 class PaymentInfo(models.Model):
-    payment_date = models.DateField(default=timezone.now().date())
+    payment_date = models.DateField(default=timezone.now)
     paid_to = models.ForeignKey(CreditCard, null=True, blank=True)
     amount = models.FloatField()
 

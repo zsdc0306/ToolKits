@@ -29,5 +29,11 @@ def orders(request):
 def gift_card_management(request):
     pass
 
-def get_order_detail():
-    pass
+def get_order_detail(request, order_id):
+    template = loader.get_template('orderdetail.html')
+    order_detail = OrderDetail.objects.get(order=order_id)
+    output = {
+        'order_detail': order_detail
+    }
+
+    return HttpResponse(template.render(output,request))

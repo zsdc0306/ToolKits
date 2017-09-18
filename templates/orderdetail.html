@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <table class="table">
+        <tr>
+            <td>
+                ID
+            </td>
+            <td>
+                {{ order_detail.order }}
+            </td>
+            <td>
+                Name
+            </td>
+            <td>
+                {{ order_detail.order_name }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                item number
+            </td>
+            <td>
+                {{ order_detail.item_num }}
+            </td>
+            <td>
+                item price
+            </td>
+            <td>
+                {{ order_detail.item_price }}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                carrier
+            </td>
+            <td>
+                {{ order_detail.carrier }}
+            </td>
+            <td>
+                tracking number
+            </td>
+            <td>
+                {{ order_detail.tracking_num }}
+            </td>
+        </tr>
+    <tr>
+            <td>
+                deliver address
+            </td>
+            <td>
+                {{ order_detail.deliver_address }}
+            </td>
+            <td>
+                credit_card
+            </td>
+            <td>
+                {{ order_detail.credit_card }}
+            </td>
+        </tr>
+    <tr>
+        <td>
+            earing
+        </td>
+        <td>
+            {{ order_detail.earning }}
+        </td>
+    </tr>
+
+
+    </table>
+
+
+
+
+{% endblock %}

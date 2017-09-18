@@ -9,6 +9,7 @@ urlpatterns = [
     url(r'^index.html$', views.index, name='index'),
     url(r'^credmanagement$', views.credit_card_management, name='management'),
     url(r'^orders$', views.orders, name='orders'),
+    url(r'^orders/(?P<order_id>[0-9]*)$', views.get_order_detail, name="orderdetail")
     #url(r'^login/(?P<username>[A-Za-z0-9]+)/AccountDetail.html$', views.viewDetail, name= "AccountDetail"),
     #url(r'^AccountDetail.html$', views.login, name='login'),
     # url(r'^create/(?P<username>[A-Za-z0-9]+)/$', views.addAccount, name= "addAccount"),

@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div class="container">
-        <h1>New Order Record</h1>
+    <div id="content" class="container">
+        <h3>New Order Record</h3>
+        <div id="content-main">
         <form role="form" autocomplete="on" action="addRecord/submit/"
               onsubmit="if(!confirm('Are you going to submit the record?')){return false;}" method="post"
               id="addRecord">
@@ -30,6 +31,12 @@
                 <div class="form-group col-md-6">
                     <label for="Merchandiser">Merchandiser</label>
                     <select class="form-control" id="Merchandiser">
+                        <option value="">---</option>
+                        {% for merchandiser in merchandisers %}
+                            <option value={{ merchandiser.id }}>{{ merchandiser.name }}</option>
+
+                        {% endfor %}
+
                     </select>
                 </div>
                 <div class="form-group col-md-6">
@@ -41,6 +48,7 @@
             <button type="submit" class="btn btn-primary">create record</button>
 
         </form>
+            </div>
     </div>
 
 

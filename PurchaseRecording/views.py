@@ -49,7 +49,10 @@ def get_order_detail(request, order_id):
 
 def create_order_record_page(request):
     template = loader.get_template("orderrecord.html")
-    output = {}
+    merchandiser = Merchandiser.objects.filter()
+    output = {
+        'merchandisers': merchandiser
+    }
     return HttpResponse(template.render(output, request))
 
 

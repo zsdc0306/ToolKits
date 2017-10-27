@@ -68,7 +68,7 @@ class EarningDetail(models.Model):
     earing_num = models.FloatField(default=0)
 
     def __unicode__(self):
-        return self.order.order_name
+        return self.earing_num
 
 
 class Address(models.Model):

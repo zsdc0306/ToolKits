@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <h1>New Order Record</h1>
+        <form role="form" autocomplete="on" action="addRecord/submit/"
+              onsubmit="if(!confirm('Are you going to submit the record?')){return false;}" method="post"
+              id="addRecord">
+
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="OrderName">Order Name</label>
+                <input type="text" class="form-control" id="OrderName">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="orderDate">Order Date</label>
+                    <input type="date" class="form-control" id="orderDate">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="orderPrice">Price</label>
+                    <input type="number" class="form-control" id="orderPrice">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="gmailLink">Mail Link</label>
+                <input type="url" class="form-control" id="gmailLink"
+                       placeholder="https://mail.google.com/mail/u/0/#inbox/abc">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="Merchandiser">Merchandiser</label>
+                    <select class="form-control" id="Merchandiser">
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="originalPrice">Original Price</label>
+                    <input type="number" class="form-control" id="originalPrice">
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">create record</button>
+
+        </form>
+    </div>
+
+
+
+
+{% endblock %}

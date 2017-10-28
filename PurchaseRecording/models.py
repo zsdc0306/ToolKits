@@ -38,8 +38,8 @@ class CashBackSite(models.Model):
 
 
 class Merchandiser(models.Model):
-    name = models.CharField(primary_key=True, max_length=10)
-    url = models.CharField(max_length=20)
+    name = models.CharField(max_length=20)
+    url = models.CharField(max_length=50)
     reward = models.FloatField(default=0.0)
 
     def __unicode__(self):
@@ -47,12 +47,12 @@ class Merchandiser(models.Model):
 
 
 class Order(models.Model):
-    order_id = models.AutoField(primary_key=True, max_length=20)
     order_name = models.CharField(max_length=20)
     merchandiser = models.ForeignKey(Merchandiser)
     order_date = models.DateField()
     order_status = models.IntegerField(choices=order_status_type, default=0)
     order_price = models.FloatField(default=0.0)
+    mail_link = models.CharField(max_length=50, default="")
 
     def __unicode__(self):
         return self.order_name
@@ -86,7 +86,6 @@ class Address(models.Model):
 
 class OrderDetail(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    order_name = models.CharField(max_length=20)
     item_price = models.FloatField(default=0.0)
     item_num = models.IntegerField(default=1, null=True, blank=True)
     carrier = models.IntegerField(choices=carrier_type, default=9)
@@ -96,7 +95,7 @@ class OrderDetail(models.Model):
     earning = models.ForeignKey(EarningDetail)
 
     def __unicode__(self):
-        return self.order_name
+        return self.order.order_name
 
 
 class PaymentInfo(models.Model):

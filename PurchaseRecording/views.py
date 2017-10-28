@@ -57,6 +57,22 @@ def create_order_record_page(request):
 
 
 def create_record(request):
-    pass
+    order_name = request.POST.get('orderName', None)
+    order_date = request.POST.get("orderDate", None)
+    order_price = request.POST.get("orderPrice")
+    order_merchandiser_id = request.POST.get("merchandiser")
+    merchandiser = Merchandiser.objects.get(id=order_merchandiser_id)
+    order = Order()
+    order.merchandiser = merchandiser
+    order.order_name = order_name
+    order.order_date = order_date
+    order.order_price = order_price
+    try:
+        order.save()
+        content = "success"
+    except Exception as e:
+        print e.message
+        content = e.message
+    return HttpResponse(content)
 
 

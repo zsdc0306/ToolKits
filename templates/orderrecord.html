@@ -3,52 +3,51 @@
     <div id="content" class="container">
         <h3>New Order Record</h3>
         <div id="content-main">
-        <form role="form" autocomplete="on" action="addRecord/submit/"
-              onsubmit="if(!confirm('Are you going to submit the record?')){return false;}" method="post"
-              id="addRecord">
+            <form role="form" autocomplete="on" action="addRecord/submit/"
+                  onsubmit="if(!confirm('Are you going to submit the record?')){return false;}" method="post"
+                  id="addRecord">
 
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="OrderName">Order Name</label>
-                <input type="text" class="form-control" id="OrderName">
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="orderDate">Order Date</label>
-                    <input type="date" class="form-control" id="orderDate">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="orderName">Order Name</label>
+                    <input type="text" class="form-control" id="orderName" name="orderName">
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="orderPrice">Price</label>
-                    <input type="number" class="form-control" id="orderPrice">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="orderDate">Order Date</label>
+                        <input type="date" class="form-control" id="orderDate" name="orderDate">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="orderPrice">Price</label>
+                        <input type="number" class="form-control" id="orderPrice" name="orderPrice">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="gmailLink">Mail Link</label>
-                <input type="url" class="form-control" id="gmailLink"
-                       placeholder="https://mail.google.com/mail/u/0/#inbox/abc">
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="Merchandiser">Merchandiser</label>
-                    <select class="form-control" id="Merchandiser">
-                        <option value="">---</option>
-                        {% for merchandiser in merchandisers %}
-                            <option value={{ merchandiser.id }}>{{ merchandiser.name }}</option>
-
-                        {% endfor %}
-
-                    </select>
+                <div class="form-group">
+                    <label for="gmailLink">Mail Link</label>
+                    <input type="url" class="form-control" id="gmailLink" name="gmailLink"
+                           placeholder="https://mail.google.com/mail/u/0/#inbox/abc">
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="originalPrice">Original Price</label>
-                    <input type="number" class="form-control" id="originalPrice">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="merchandiser">Merchandiser</label>
+                        <select class="form-control" id="merchandiser" name="merchandiser">
+                            <option selected disabled>---</option>
+                            {% for merchandiser in merchandisers %}
+                                <option value={{ merchandiser.id }}>{{ merchandiser.name }}</option>
+                            {% endfor %}
+
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="originalPrice">Original Price</label>
+                        <input type="number" class="form-control" id="originalPrice" name="originalPrice">
+                    </div>
                 </div>
-            </div>
 
-            <button type="submit" class="btn btn-primary">create record</button>
+                <button type="submit" class="btn btn-primary">create record</button>
 
-        </form>
-            </div>
+            </form>
+        </div>
     </div>
 
 

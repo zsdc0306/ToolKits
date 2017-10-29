@@ -61,14 +61,19 @@ def create_record(request):
     order_date = request.POST.get("orderDate", None)
     order_price = request.POST.get("orderPrice")
     order_merchandiser_id = request.POST.get("merchandiser")
+    order_mail_link = request.POST.get("gmailLink")
     merchandiser = Merchandiser.objects.get(id=order_merchandiser_id)
     order = Order()
     order.merchandiser = merchandiser
     order.order_name = order_name
     order.order_date = order_date
     order.order_price = order_price
+    order.mail_link = order_mail_link
+    order_detail = OrderDetail()
     try:
         order.save()
+        order_detail.order = order
+        order_detail.save()
         content = "success"
     except Exception as e:
         print e.message

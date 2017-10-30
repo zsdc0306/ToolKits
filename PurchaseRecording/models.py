@@ -20,6 +20,14 @@ carrier_type = (
     (9, 'undefined')
 )
 
+pay_method = (
+    (0, "Credit Card"),
+    (1, "Gift Card"),
+    (8, "other"),
+    (9, "undefined")
+)
+
+
 
 class CreditCard(models.Model):
     card_num = models.CharField(unique=True, primary_key=True, max_length=16)
@@ -32,9 +40,12 @@ class CreditCard(models.Model):
 
 
 class CashBackSite(models.Model):
-    site_url = models.CharField(unique=True, max_length=20, error_messages={'unique': "site already existed"})
-    site_name = models.CharField(unique=True, primary_key=True, max_length=10)
+    site_url = models.CharField(unique=True, max_length=50, error_messages={'unique': "site already existed"})
+    site_name = models.CharField(unique=True, primary_key=True, max_length=20)
     balance = models.FloatField(default=0.0)
+
+    def __unicode__(self):
+        return self.site_name
 
 
 class Merchandiser(models.Model):
@@ -44,6 +55,20 @@ class Merchandiser(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class GiftCard(models.Model):
+    card_id = models.CharField(primary_key=True, max_length=10)
+    brand = models.ForeignKey(Merchandiser, on_delete=models.CASCADE)
+    value = models.FloatField()
+    card_num = models.CharField(max_length=30)
+    pin_num = models.CharField(max_length=10)
+    is_used = models.BooleanField()
+    remain_value = models.FloatField(default=value)
+    expire_date = models.DateField(default=timezone.now().date() + timedelta(days=365))
+
+    def __unicode__(self):
+        return self.brand.name + str(self.remain_value)
 
 
 class Order(models.Model):
@@ -91,7 +116,9 @@ class OrderDetail(models.Model):
     carrier = models.IntegerField(choices=carrier_type, default=9)
     tracking_num = models.CharField(max_length=20, default="undefined")
     deliver_address = models.ForeignKey(Address, default=2)
-    credit_card = models.ForeignKey(CreditCard, default=1)
+    pay_method = models.IntegerField(choices=pay_method, default=9)
+    gift_card = models.ForeignKey(GiftCard, null=True, blank=True)
+    credit_card = models.ForeignKey(CreditCard, null=True)
     earning = models.ForeignKey(EarningDetail, null=True, blank=True)
 
     def __unicode__(self):
@@ -103,13 +130,6 @@ class PaymentInfo(models.Model):
     paid_to = models.ForeignKey(CreditCard, null=True, blank=True)
     amount = models.FloatField()
 
+    def __unicode__(self):
+        return str(self.payment_date)
 
-class GiftCard(models.Model):
-    card_id = models.CharField(primary_key=True, max_length=10)
-    brand = models.ForeignKey(Merchandiser, on_delete=models.CASCADE)
-    value = models.FloatField()
-    card_num = models.CharField(max_length=30)
-    pin_num = models.CharField(max_length=10)
-    is_used = models.BooleanField()
-    remain_value = models.FloatField(default=value)
-    expire_date = models.DateField(default=timezone.now().date() + timedelta(days=365))

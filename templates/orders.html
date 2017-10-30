@@ -15,7 +15,9 @@
         <tbody>
         {% for order_item in order %}
             <tr>
-                <th scope="row">{{ order_item.order_id }}</th>
+                <th scope="row">
+                    <a target="_blank" href={{ order_item.mail_link }}> {{ order_item.id }}</a>
+                </th>
 
                 <td>{{ order_item.order_date }}</td>
                 <td>

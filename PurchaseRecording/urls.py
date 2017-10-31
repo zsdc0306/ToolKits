@@ -16,7 +16,6 @@ urlpatterns = [
     # url(r'^AccountDetail.html$', views.login, name='login'),
     # url(r'^create/(?P<username>[A-Za-z0-9]+)/$', views.addAccount, name= "addAccount"),
     url(r'^addRecord/submit/',views.create_record,name="addRecord"),
-    url(r'^gcmanagement/submit/',views.test_form,name="gcadd"),
     # url(r'^form/submit/', views.upgradeAccount, name="upgradeAccount"),
     # url(r'^form/record/delete/', views.deleteRecord, name="deleteRecord"),
     # url(r'^form/record/update/', views.updateRecord, name="updateRecord"),

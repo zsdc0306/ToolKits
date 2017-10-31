@@ -26,7 +26,7 @@
                     </a></td>
                 <td>{{ order_item.merchandiser }}</td>
                 <td>{{ order_item.order_price }}</td>
-                <td>{{ order_item.order_status }}</td>
+                <td>{{ order_item.get_order_status_display }}</td>
             </tr>
         {% endfor %}
 

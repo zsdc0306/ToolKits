@@ -77,7 +77,7 @@ class Order(models.Model):
     order_date = models.DateField()
     order_status = models.IntegerField(choices=order_status_type, default=0)
     order_price = models.FloatField(default=0.0)
-    mail_link = models.CharField(max_length=50, default="")
+    mail_link = models.CharField(max_length=100, default="")
 
     def __unicode__(self):
         return self.order_name

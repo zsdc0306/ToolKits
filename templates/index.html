@@ -1,1 +1,67 @@
 {% extends 'base.html' %}
+{% block content %}
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    <script>
+        window.onload = function () {
+
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                title: {
+                    text: "Order Categories"
+                },
+                data: [{
+                    type: "pie",
+                    startAngle: 240,
+                    yValueFormatString: "##0.00\"%\"",
+                    indexLabel: "{label} {y}",
+                    dataPoints: [
+                        {% for key, val in status.items %}
+                            {y: {{ val }}, label: "{{ key }}" },
+                        {% endfor %}
+                    ]
+                }]
+            });
+            chart.render();
+
+        }
+    </script>
+
+
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+
+
+        </div>
+        <div class="col-lg-4">
+
+
+        </div>
+        <div class="col-lg-4">
+
+
+        </div>
+
+
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+
+
+        </div>
+        <div class="col-lg-4">
+
+
+        </div>
+        <div class="col-lg-4">
+
+
+        </div>
+
+
+    </div>
+
+
+{% endblock %}

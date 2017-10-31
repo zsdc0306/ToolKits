@@ -7,9 +7,26 @@ from django.template import loader
 
 def index(request):
     template = loader.get_template('index.html')
+    order_status_percentage = get_status_summary()
+    print order_status_percentage
     output = {
+        "status": order_status_percentage
     }
     return HttpResponse(template.render(output,request))
+
+
+def get_status_summary(date=None):
+    total_order = Order.objects.filter().count().__float__()
+    ordered_num = Order.objects.filter(order_status=0).count().__float__()
+    shipped_num = Order.objects.filter(order_status=1).count().__float__()
+    canceled_num = Order.objects.filter(order_status=2).count().__float__()
+    delivered_num = Order.objects.filter(order_status=3).count().__float__()
+    picked_num = Order.objects.filter(order_status=4).count().__float__()
+    percentage = {"ordered": ordered_num / total_order, "shipped": shipped_num / total_order,
+                  "canceled": canceled_num / total_order, "delivered": delivered_num / total_order,
+                  "picked": picked_num / total_order}
+    return percentage
+
 
 
 def credit_card_management(request):
@@ -22,8 +39,9 @@ def credit_card_management(request):
 def orders(request):
     template = loader.get_template('orders.html')
     orders = Order.objects.filter().order_by("-order_date")
-    for order in orders:
-        order.order_status = order_status_type[order.order_status][1]
+    # use get_order_status_display instead of this
+    # for order in orders:
+    #     order.order_status = order_status_type[order.order_status][1]
     output = {
         'order': orders
     }
@@ -95,6 +113,9 @@ def create_record(request):
         order_detail.save()
     except Exception as e:
         return HttpResponse(e.message)
+    # TODO
+    # use banner instead of HTTP response
+    template = loader.get_template("orders.html")
     return HttpResponse("success")
 
 

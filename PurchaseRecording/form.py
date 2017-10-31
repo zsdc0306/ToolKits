@@ -11,13 +11,17 @@ class GiftCardForm(forms.ModelForm):
                 'class': 'form-control'
             }),
             'value': forms.NumberInput(attrs={
-                'class': 'form-control'
+                'class': 'form-control',
+                'type': 'number',
+                'step': 'any',
             }),
             'card_num': forms.TextInput(attrs={
                 'class': 'form-control'
             }),
             'pin_num': forms.NumberInput(attrs={
-                'class': 'form-control'
+                'class': 'form-control',
+                'type': 'number',
+                'step': 'any',
             }),
             'is_used': forms.CheckboxInput(attrs={
                 'class': 'form-control'

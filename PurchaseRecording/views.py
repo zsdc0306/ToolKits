@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import *
 from django.template import loader
+from .form import *
 # Create your views here.
 
 
@@ -28,7 +29,6 @@ def get_status_summary(date=None):
     return percentage
 
 
-
 def credit_card_management(request):
     template = loader.get_template('credmanagement.html')
     output = {
@@ -43,13 +43,27 @@ def orders(request):
     # for order in orders:
     #     order.order_status = order_status_type[order.order_status][1]
     output = {
-        'order': orders
+        'order': orders,
+        'status_types' : order_status_type
     }
     return HttpResponse(template.render(output, request))
 
 
 def gift_card_management(request):
-    pass
+    if request.method == "POST":
+        form = GiftCardForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+    gift_card = GiftCard.objects.filter()
+    template = loader.get_template('gcmanagement.html')
+    form = GiftCardForm
+    output = {
+        'gift_cards': gift_card,
+        'form': form
+
+    }
+    return HttpResponse(template.render(output, request))
 
 
 def get_order_detail(request, order_id):

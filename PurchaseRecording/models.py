@@ -58,7 +58,6 @@ class Merchandiser(models.Model):
 
 
 class GiftCard(models.Model):
-    card_id = models.CharField(primary_key=True, max_length=10)
     brand = models.ForeignKey(Merchandiser, on_delete=models.CASCADE)
     value = models.FloatField()
     card_num = models.CharField(max_length=30)

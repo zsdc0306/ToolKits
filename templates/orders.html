@@ -26,7 +26,17 @@
                     </a></td>
                 <td>{{ order_item.merchandiser }}</td>
                 <td>{{ order_item.order_price }}</td>
-                <td>{{ order_item.get_order_status_display }}</td>
+                <td><select class="input-group" onchange="">
+                    <option selected value={{ order_item.order_status }}>
+                        {{ order_item.get_order_status_display }}</option>
+                    {% for status_type_val, status_type_display in status_types %}
+                        {% if status_type_val != order_item.order_status %}
+                            <option value="{{ status_type_val }}">{{ status_type_display }}</option>
+
+                        {% endif %}
+
+                    {% endfor %}
+                </select></td>
             </tr>
         {% endfor %}
 

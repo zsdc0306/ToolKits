@@ -1,1 +1,22 @@
 {% extends 'base.html' %}
+
+{% block content %}
+    <div id="content" class="container">
+        <h3>New Order Record</h3>
+        <form role="form" action="gcmanagement/submit/" method="post">
+            {% csrf_token %}
+            <div class="row">
+                {% for field in form %}
+                    <div class="col-md-6">
+                        {{ field.label_tag }} {{ field }}
+                    </div>
+                {% endfor %}
+            </div>
+            <br>
+            <input class="btn btn-primary" type="submit" value="Submit">
+
+        </form>
+    </div>
+
+
+{% endblock %}

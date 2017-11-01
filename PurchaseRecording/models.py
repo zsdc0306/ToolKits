@@ -64,7 +64,7 @@ class GiftCard(models.Model):
     pin_num = models.CharField(max_length=10)
     is_used = models.BooleanField(default=False)
     remain_value = models.FloatField(default=value)
-    expire_date = models.DateField(default=timezone.now().date() + timedelta(days=365))
+    expire_date = models.DateField(default=timezone.now().date() + timedelta(days=365), null=True, blank=True)
 
     def __unicode__(self):
         return self.brand.name + str(self.remain_value)
@@ -88,7 +88,7 @@ class EarningDetail(models.Model):
     cashback = models.ForeignKey(CashBackSite, null=True, blank=True)
     credit_card_cashback = models.FloatField(default=0.0)
     other_cashback = models.FloatField(default=0.0)
-    note = models.CharField(blank=True, max_length=200)
+    note = models.CharField(blank=True, max_length=200, null=True)
     earing_num = models.FloatField(default=0)
 
     def __unicode__(self):

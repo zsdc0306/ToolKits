@@ -62,7 +62,7 @@ class GiftCard(models.Model):
     value = models.FloatField()
     card_num = models.CharField(max_length=30)
     pin_num = models.CharField(max_length=10)
-    is_used = models.BooleanField()
+    is_used = models.BooleanField(default=False)
     remain_value = models.FloatField(default=value)
     expire_date = models.DateField(default=timezone.now().date() + timedelta(days=365))
 

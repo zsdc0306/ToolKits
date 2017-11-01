@@ -47,18 +47,16 @@
                     <p>Optional Field</p>
                 </div>
                 <div class="form-row">
-                     <div class="form-group col-md-6">
+                    <div class="form-group col-md-3">
                         <label for="itemPrice">Item Price</label>
-                        <input type="number" step="any" class="form-control" id="itemPrice" name="itemPrice">
+                        <input type="number" step="any" class="form-control" id="itemPrice" name="itemPrice" value=0>
                     </div>
 
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-3">
                         <label for="itemNum">Item Number</label>
-                        <input type="number" class="form-control" id="itemNum" name="itemNum">
+                        <input type="number" class="form-control" id="itemNum" name="itemNum" value=1>
                     </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-3">
                         <label for="payMethod">Pay Method</label>
                         <select class="form-control" id="payMethod" name="payMethod">
                             <option selected value=9>---</option>
@@ -69,7 +67,7 @@
                             <option value=8>Other</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-3">
                         <label for="deliverAddress">Deliver Address</label>
                         <select class="form-control" id="deliverAddress" name="deliverAddress">
                             <option selected value="">---</option>
@@ -81,7 +79,7 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-3">
                         <label for="cashbackSite">Cash Back Site</label>
                         <select class="form-control" id="cashbackSite" name="cashbackSite">
                             <option selected>---</option>
@@ -90,15 +88,36 @@
                             {% endfor %}
                         </select>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-3">
 
-                            <label for="cashbackRate">Cashback Rate</label>
+                        <label for="cashbackRate">Cashback Rate</label>
                         <div class="input-group">
-                        <input type="number" step="any" class="form-control" id="cashbackRate" name="cashbackRate">
-                        <span class="input-group-addon">%</span>
+                            <input type="number" step="any" class="form-control" id="cashbackRate" name="cashbackRate"
+                                   value=0>
+                            <span class="input-group-addon">%</span>
                         </div>
 
                     </div>
+                    <div class="form-group col-md-3">
+                        <label for="creditCardBash">CC Cashback</label>
+                        <div class="input-group">
+                            <input type="number" step="any" class="form-control" id="creditCardBash"
+                                   name="creditCardBash" value=1>
+                            <span class="input-group-addon">%</span>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-3">
+
+                        <label for="otherCashback">Other Cashback</label>
+                        <div class="input-group">
+                            <input type="number" step="any" class="form-control" id="otherCashback"
+                                   name="otherCashback" value=0>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="note">Note</label>
+                    <input type="text" class="form-control" id="note" name="note">
                 </div>
 
                 <button type="submit" class="btn btn-primary">create record</button>

@@ -9,7 +9,6 @@ from .form import *
 def index(request):
     template = loader.get_template('index.html')
     order_status_percentage = get_status_summary()
-    print order_status_percentage
     output = {
         "status": order_status_percentage
     }
@@ -69,7 +68,6 @@ def gift_card_management(request):
 def get_order_detail(request, order_id):
     template = loader.get_template('orderdetail.html')
     order_detail = OrderDetail.objects.get(order=order_id)
-    print order_detail.order.order_status
     order_detail.order.order_status = order_status_type[order_detail.order.order_status][1]
 
     output = {
@@ -142,7 +140,6 @@ def set_order_detail(order_detail, order, item_price=None, item_num=None, pay_me
         order_detail.item_num = item_num
     order_detail.pay_method = pay_type
     if pay_type == 0:
-        print pay_method_val
         credit_card = CreditCard.objects.get(card_num=pay_method_val)
         order_detail.credit_card = credit_card
     if deliver_addr:

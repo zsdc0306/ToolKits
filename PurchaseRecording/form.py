@@ -5,7 +5,7 @@ from models import *
 class GiftCardForm(forms.ModelForm):
     class Meta:
         model = GiftCard
-        fields = ['brand', 'value', 'card_num', 'pin_num', 'is_used', 'remain_value', 'expire_date']
+        fields = ['brand', 'value', 'card_num', 'pin_num', 'remain_value', 'expire_date']
         widgets = {
             'brand': forms.Select(attrs={
                 'class': 'form-control'
@@ -22,9 +22,6 @@ class GiftCardForm(forms.ModelForm):
                 'class': 'form-control',
                 'type': 'number',
                 'step': 'any',
-            }),
-            'is_used': forms.CheckboxInput(attrs={
-                'class': 'form-control'
             }),
             'remain_value': forms.NumberInput(attrs={
                 'type': 'number',

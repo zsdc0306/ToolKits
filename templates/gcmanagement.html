@@ -9,42 +9,53 @@
             <th>Value</th>
             <th>Remain Value</th>
             <th>Expire Date</th>
+            <th>Redeem</th>
         </tr>
         </thead>
         <tbody>
 
 
         {% for gc in gift_cards %}
-            <tr>
-                <th scope="row">
-                    {{ gc.id }}
-                </th>
-                <td>{{ gc.brand }}</td>
-                <td>{{ gc.value }}</td>
-                <td>{{ gc.remain_value }}</td>
-            <td>{{ gc.expire_date }}</td>
-            </tr>
+            {% if gc.is_used == False %}
+                <tr>
+                    <th scope="row">
+                        {{ gc.id }}
+                    </th>
+                    <td>{{ gc.brand }}</td>
+                    <td>{{ gc.value }}</td>
+                    <td>{{ gc.remain_value }}</td>
+                    <td>{{ gc.expire_date }}</td>
+                    <td>
+                        <form role="form" method="post">
+                            <input class="" type="" value="redeem">
+
+                        </form>
+                    </td>
+                </tr>
+
+
+            {% endif %}
         {% endfor %}
 
         </tbody>
     </table>
-        <p>-----------------------------------------------</p>
-        <div id="content" class="container">
-            <h3>New Gift Card</h3>
-            <form role="form" action="GCmanagement" method="post">
-                {% csrf_token %}
-                <div class="row">
-                    {% for field in form %}
-                        <div class="col-md-6">
-                            {{ field.label_tag }} {{ field }}
-                        </div>
-                    {% endfor %}
-                </div>
-                <br>
-                <input class="btn btn-primary" type="submit" value="Submit">
+    <p>-----------------------------------------------</p>
+    <div id="content" class="container">
+        <h3>New Gift Card</h3>
+        <form role="form" action="GCmanagement" method="post">
+            {% csrf_token %}
+            <div class="row">
+                {% for field in form %}
+                    <div class="col-md-6">
+                        {{ field.label_tag }} {{ field }}
+                    </div>
+                {% endfor %}
+            </div>
+            <br>
+            <input class="btn btn-primary" type="submit" value="Submit">
 
-            </form>
-        </div>
+        </form>
+    </div>
 
 
 {% endblock %}

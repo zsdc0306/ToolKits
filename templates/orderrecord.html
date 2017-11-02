@@ -70,7 +70,7 @@
                     <div class="form-group col-md-3">
                         <label for="deliverAddress">Deliver Address</label>
                         <select class="form-control" id="deliverAddress" name="deliverAddress">
-                            <option selected value="">---</option>
+                            <option selected>---</option>
                             {% for address in addresses %}
                                 <option value={{ address.id }}>{{ address.addr_name }}</option>
                             {% endfor %}
@@ -82,9 +82,9 @@
                     <div class="form-group col-md-3">
                         <label for="cashbackSite">Cash Back Site</label>
                         <select class="form-control" id="cashbackSite" name="cashbackSite">
-                            <option selected>---</option>
+                            <option selected disabled>---</option>
                             {% for cashback in cashbacks %}
-                                <option value={{ cashback.site_name }}>{{ cashback.site_name }}</option>
+                                <option value="{{ cashback.site_name }}">{{ cashback.site_name }}</option>
                             {% endfor %}
                         </select>
                     </div>

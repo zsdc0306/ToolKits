@@ -1,7 +1,6 @@
 from __future__ import unicode_literals
 from datetime import datetime, timedelta
 from django.utils import timezone
-
 from django.db import models
 
 # Create your models here.
@@ -28,11 +27,18 @@ pay_method = (
 )
 
 
+class User(models.Model):
+    user_name = models.CharField(primary_key=True, max_length=10)
+    password = models.CharField(max_length=30)
+
+    def __unicode__(self):
+        return self.user_name
+
 
 class CreditCard(models.Model):
     card_num = models.CharField(unique=True, primary_key=True, max_length=16)
     sec_code = models.CharField(max_length=4, default="0000")
-    card_name = models.CharField(unique=True, max_length=10)
+    card_name = models.CharField(unique=True, max_length=20)
     card_exp_date = models.DateField(default=timezone.now().date() + timedelta(days=365 * 5))
 
     def __unicode__(self):

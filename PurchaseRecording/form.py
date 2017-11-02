@@ -33,3 +33,12 @@ class GiftCardForm(forms.ModelForm):
                 'class': 'form-control'
             })
         }
+
+
+class AuthorityForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = {'user_name', 'password'}
+        widgets = {
+            'password': forms.PasswordInput(),
+        }

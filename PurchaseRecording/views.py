@@ -3,16 +3,29 @@ from django.http import HttpResponse
 from .models import *
 from django.template import loader
 from .form import *
+from django.utils import timezone
+from datetime import datetime, timedelta
+# from utils.logger import my_logger
 # Create your views here.
 
 
 def index(request):
     template = loader.get_template('index.html')
     order_status_percentage = get_status_summary()
+    gift_card_value = get_gift_card_summary()
     output = {
-        "status": order_status_percentage
+        "status": order_status_percentage,
+        "giftcard_status": gift_card_value
     }
     return HttpResponse(template.render(output,request))
+
+
+def get_gift_card_summary():
+    alert_date = timezone.now().date() + timedelta(days=30)
+    about_expire_gift_cards = GiftCard.objects.filter(is_used=False, expire_date__gte=alert_date)
+    # TODO
+    
+    return
 
 
 def get_status_summary(date=None):
@@ -43,7 +56,7 @@ def orders(request):
     #     order.order_status = order_status_type[order.order_status][1]
     output = {
         'order': orders,
-        'status_types' : order_status_type
+        'status_types': order_status_type
     }
     return HttpResponse(template.render(output, request))
 
@@ -117,8 +130,9 @@ def create_record(request):
     try:
         order.save()
     except Exception as e:
-        print e.message
+        # my_logger.error(e.message)
         return HttpResponse(e.message)
+    print pay_method_val
     order_detail = set_order_detail(order_detail, order, item_price, item_num, pay_method_val,
                                     deliver_addr, cash_back_site, cashback)
     try:
@@ -131,17 +145,19 @@ def create_record(request):
     return HttpResponse("success")
 
 
-def set_order_detail(order_detail, order, item_price=None, item_num=None, pay_method_val=9,
+def set_order_detail(order_detail, order, item_price=None, item_num=None, pay_method_val=None,
                      deliver_addr=None, cash_back_site=None, cash_back=0.0):
-    pay_type = pay_method_val if pay_method_val == 1 or pay_method_val == 8 or pay_method_val == 9 else 0
     if item_price:
         order_detail.item_price = item_price
     if item_num:
         order_detail.item_num = item_num
-    order_detail.pay_method = pay_type
-    if pay_type == 0:
-        credit_card = CreditCard.objects.get(card_num=pay_method_val)
-        order_detail.credit_card = credit_card
+    if pay_method_val:
+        pay_type = pay_method_val if len(pay_method_val) == 1 else 0
+        order_detail.pay_method = pay_type
+        if pay_type == 0:
+            order_detail.pay_method = pay_type
+            credit_card = CreditCard.objects.get(card_num=pay_method_val)
+            order_detail.credit_card = credit_card
     if deliver_addr:
         address = Address.objects.get(id=deliver_addr)
         order_detail.deliver_address = address
@@ -156,5 +172,21 @@ def set_order_detail(order_detail, order, item_price=None, item_num=None, pay_me
     order_detail.order = order
     return order_detail
 
+
+def authority(request):
+    if request.method == "POST":
+        form = AuthorityForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+    gift_card = GiftCard.objects.filter()
+    template = loader.get_template('gcmanagement.html')
+    form = GiftCardForm
+    output = {
+        'gift_cards': gift_card,
+        'form': form
+
+    }
+    return HttpResponse(template.render(output, request))
 
 

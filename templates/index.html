@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    {% load static %}
+    <script src="{% static 'assets/canvasjs-1.9.10/canvasjs-1.9.10-stable/canvasjs.min.js' %}"></script>
 
     <script>
         window.onload = function () {

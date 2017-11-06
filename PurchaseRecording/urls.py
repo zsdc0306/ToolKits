@@ -23,4 +23,3 @@ urlpatterns = [
     # url(r'^form/record/generatechart/', views.genChart, name="genChart"),
     # url(r'^form/record/export/', views.exportCSV, name="exportCSV"),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-

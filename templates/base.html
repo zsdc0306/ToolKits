@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <title>Index</title>
     {#    <link href="/static/assets/bootstrap-4.0.0-beta-dist/css/bootstrap.css" rel="stylesheet">#}
@@ -16,7 +17,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
             integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
             crossorigin="anonymous"></script>
-    <link rel="stylesheet" type="text/css" href="/static/assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/main.css' %}">
 </head>
 <body>
 <header>
@@ -29,7 +30,7 @@
             <a class="navbar-brand" href="#">PR</a>
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/PurchaseRecord/#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="{% url 'index' %}">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
@@ -37,8 +38,8 @@
                         Order
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/PurchaseRecord/orders">Order View</a>
-                        <a class="dropdown-item" href="/PurchaseRecord/ordersrecord">Order Reocrd</a>
+                        <a class="dropdown-item" href="{% url 'orders' %}">Order View</a>
+                        <a class="dropdown-item" href="{% url 'ordercreate' %}">Order Reocrd</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -47,8 +48,8 @@
                         Management
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        <a class="dropdown-item" href="/PurchaseRecord/credmanagement">Credit Card Management</a>
-                        <a class="dropdown-item" href="/PurchaseRecord/GCmanagement">Gift Card Management</a>
+                        <a class="dropdown-item" href="{% url 'ccmanagement' %}">Credit Card Management</a>
+                        <a class="dropdown-item" href="{% url 'gcmanagement' %}">Gift Card Management</a>
                         <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                 </li>

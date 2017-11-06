@@ -27,7 +27,7 @@
                     <td>{{ gc.expire_date }}</td>
                     <td>
                         <form role="form" method="post">
-                            <input class="" type="" value="redeem">
+                            <input class="btn btn-sm" type="button" value="redeem">
 
                         </form>
                     </td>
@@ -42,7 +42,7 @@
     <p>-----------------------------------------------</p>
     <div id="content" class="container">
         <h3>New Gift Card</h3>
-        <form role="form" action="GCmanagement" method="post">
+        <form role="form" action="{% url 'gcmanagement' %}" method="post">
             {% csrf_token %}
             <div class="row">
                 {% for field in form %}

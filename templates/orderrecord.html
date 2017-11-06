@@ -3,7 +3,7 @@
     <div id="content" class="container">
         <h3>New Order Record</h3>
         <div id="content-main">
-            <form role="form" autocomplete="on" action="addRecord/submit/"
+            <form role="form" autocomplete="on" action="{% url 'addRecord' %}"
                   onsubmit="if(!confirm('Are you going to submit the record?')){return false;}" method="post"
                   id="addRecord">
 

@@ -15,7 +15,9 @@ urlpatterns = [
     # url(r'^login/(?P<username>[A-Za-z0-9]+)/AccountDetail.html$', views.viewDetail, name= "AccountDetail"),
     # url(r'^AccountDetail.html$', views.login, name='login'),
     # url(r'^create/(?P<username>[A-Za-z0-9]+)/$', views.addAccount, name= "addAccount"),
-    url(r'^addRecord/submit/',views.create_record,name="addRecord"),
+    url(r'^addRecord/submit/',views.create_record, name="addRecord"),
+    url(r'^addRecord/update/',views.update_status, name="updateStatus"),
+    url(r'auth/$', views.auth_views.login, {'template_name': 'authority.html'})
     # url(r'^form/submit/', views.upgradeAccount, name="upgradeAccount"),
     # url(r'^form/record/delete/', views.deleteRecord, name="deleteRecord"),
     # url(r'^form/record/update/', views.updateRecord, name="updateRecord"),

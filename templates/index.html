@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
-{% block content %}
-    {% load static %}
+{% load static %}
+{% block extra_js %}
     <script src="{% static 'assets/canvasjs-1.9.10/canvasjs-1.9.10-stable/canvasjs.min.js' %}"></script>
+{% endblock %}
+{% block content %}
 
     <script>
         window.onload = function () {
@@ -18,7 +20,7 @@
                     indexLabel: "{label} {y}",
                     dataPoints: [
                         {% for key, val in status.items %}
-                            {y: {{ val }}, label: "{{ key }}" },
+                            {y: {{ val }}, label: "{{ key }}"},
                         {% endfor %}
                     ]
                 }]
